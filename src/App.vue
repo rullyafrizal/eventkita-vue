@@ -56,3 +56,6 @@ export default {
   opacity: 0;
 }
 </style>
+
+<style src="./assets/css/index.css"></style>
+<style src="./assets/css/index.scss" lang="scss"></style>
