@@ -61,7 +61,10 @@ const routes = [
   {
     path: '/dashboard/profile',
     name: 'Profile',
-    component: () => import('../Views/Profile')
+    component: () => import('../Views/Profile'),
+    meta: {
+      requiresAuth: true
+    }
   }
 ]
 
@@ -81,10 +84,11 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   if (to.matched.some(route => route.meta.requiresAuth)) {
     const auth = JSON.parse(localStorage.getItem('eventkita-token')).auth.token
+
     if (!(Object.keys(auth).length === 0)) {
       next()
     } else {
-      next({ path: '/restricted' })
+      next({ path: '/auth/login' })
     }
   }
   next()

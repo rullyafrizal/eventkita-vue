@@ -1,5 +1,5 @@
 <template>
-  <section class="call-to-action bg-purple-progress pt-20 pb-10">
+  <section class="call-to-action bg-purple-progress py-36">
     <div class="container mx-auto">
       <div class="w-full text-center">
         <h1 class="leading-normal text-5xl text-white font-semibold">

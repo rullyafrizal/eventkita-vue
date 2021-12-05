@@ -7,8 +7,25 @@ import axios from './plugins/axios'
 import router from './router'
 import VueProgressBar from 'vue-progressbar'
 import VueMeta from 'vue-meta'
+import * as Sentry from '@sentry/vue'
+import { Integrations } from '@sentry/tracing'
 
 Vue.config.productionTip = false
+
+Sentry.init({
+  Vue,
+  dsn: 'https://af04aa7d05974b739e1a024efc5b179d@o1069250.ingest.sentry.io/6063616',
+  integrations: [
+    new Integrations.BrowserTracing({
+      routingInstrumentation: Sentry.vueRouterInstrumentation(router),
+      tracingOrigins: ['localhost', 'my-site-url.com', /^\//]
+    })
+  ],
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  // We recommend adjusting this value in production
+  tracesSampleRate: 1.0
+})
 
 const options = {
   color: '#D97706',
@@ -26,7 +43,7 @@ const options = {
 Vue.use(VueProgressBar, options)
 Vue.use(VueMeta)
 
-Vue.prototype.$apiDomain = 'http://localhost:8000'
+Vue.prototype.$apiDomain = 'http://eventkita.my.id'
 
 new Vue({
   axios,

@@ -2,7 +2,7 @@
   <div class="container mx-auto h-screen flex justify-center items-center">
     <div class="w-full lg:w-1/3 px-10 lg:px-0">
       <div class="flex justify-center items-center mx-auto mt-6 mb-8">
-        <img src="../assets/404-illustration.svg" alt="" class="w-full" />
+        <img src="../assets/403-illustration.svg" alt="" class="w-full" />
       </div>
       <h2 class="font-medium mb-3 text-3xl text-center">
         Oops, Access Restricted!

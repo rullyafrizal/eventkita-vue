@@ -998,6 +998,81 @@
     "@nodelib/fs.scandir" "2.1.5"
     "fastq" "^1.6.0"
 
+"@sentry/browser@6.15.0":
+  "integrity" "sha512-ZiqfHK5DMVgDsgMTuSwxilWIqEnZzy4yuJ9Sr6Iap1yZddPSiKHYjbBieSHn57UsWHViRB3ojbwu44LfvXKJdQ=="
+  "resolved" "https://registry.npmjs.org/@sentry/browser/-/browser-6.15.0.tgz"
+  "version" "6.15.0"
+  dependencies:
+    "@sentry/core" "6.15.0"
+    "@sentry/types" "6.15.0"
+    "@sentry/utils" "6.15.0"
+    "tslib" "^1.9.3"
+
+"@sentry/core@6.15.0":
+  "integrity" "sha512-mCbKyqvD1G3Re6gv6N8tRkBz84gvVWDfLtC6d1WBArIopzter6ktEbvq0cMT6EOvGI2OLXuJ6mtHA93/Q0gGpw=="
+  "resolved" "https://registry.npmjs.org/@sentry/core/-/core-6.15.0.tgz"
+  "version" "6.15.0"
+  dependencies:
+    "@sentry/hub" "6.15.0"
+    "@sentry/minimal" "6.15.0"
+    "@sentry/types" "6.15.0"
+    "@sentry/utils" "6.15.0"
+    "tslib" "^1.9.3"
+
+"@sentry/hub@6.15.0":
+  "integrity" "sha512-cUbHPeG6kKpGBaEMgbTWeU03Y1Up5T3urGF+cgtrn80PmPYYSUPvVvWlZQWPb8CJZ1yQ0gySWo5RUTatBFrEHA=="
+  "resolved" "https://registry.npmjs.org/@sentry/hub/-/hub-6.15.0.tgz"
+  "version" "6.15.0"
+  dependencies:
+    "@sentry/types" "6.15.0"
+    "@sentry/utils" "6.15.0"
+    "tslib" "^1.9.3"
+
+"@sentry/minimal@6.15.0":
+  "integrity" "sha512-7RJIvZsjBa1qFUfMrAzQsWdfZT6Gm4t6ZTYfkpsXPBA35hkzglKbBrhhsUvkxGIhUGw/PiCUqxBUjcmzQP0vfg=="
+  "resolved" "https://registry.npmjs.org/@sentry/minimal/-/minimal-6.15.0.tgz"
+  "version" "6.15.0"
+  dependencies:
+    "@sentry/hub" "6.15.0"
+    "@sentry/types" "6.15.0"
+    "tslib" "^1.9.3"
+
+"@sentry/tracing@^6.15.0":
+  "integrity" "sha512-V5unvX8qNEfdawX+m2n0jKgmH/YR2ItWZLH+3UevBTptO+xyfvRtpgGXYWUCo3iGvFgWb1C+iIC7LViR9rTvBg=="
+  "resolved" "https://registry.npmjs.org/@sentry/tracing/-/tracing-6.15.0.tgz"
+  "version" "6.15.0"
+  dependencies:
+    "@sentry/hub" "6.15.0"
+    "@sentry/minimal" "6.15.0"
+    "@sentry/types" "6.15.0"
+    "@sentry/utils" "6.15.0"
+    "tslib" "^1.9.3"
+
+"@sentry/types@6.15.0":
+  "integrity" "sha512-zBw5gPUsofXUSpS3ZAXqRNedLRBvirl3sqkj2Lez7X2EkKRgn5D8m9fQIrig/X3TsKcXUpijDW5Buk5zeCVzJA=="
+  "resolved" "https://registry.npmjs.org/@sentry/types/-/types-6.15.0.tgz"
+  "version" "6.15.0"
+
+"@sentry/utils@6.15.0":
+  "integrity" "sha512-gnhKKyFtnNmKWjDizo7VKD0/Vx8cgW1lCusM6WI7jy2jlO3bQA0+Dzgmr4mIReZ74mq4VpOd2Vfrx7ZldW1DMw=="
+  "resolved" "https://registry.npmjs.org/@sentry/utils/-/utils-6.15.0.tgz"
+  "version" "6.15.0"
+  dependencies:
+    "@sentry/types" "6.15.0"
+    "tslib" "^1.9.3"
+
+"@sentry/vue@^6.15.0":
+  "integrity" "sha512-RkXEjjKN3tMXMUfG7m1i6qeMaO7WB8j7gZalRSPjcNQgaOJcO35NnEYH2QeB1nF9CS/BBC45Vv7YturTRooJtg=="
+  "resolved" "https://registry.npmjs.org/@sentry/vue/-/vue-6.15.0.tgz"
+  "version" "6.15.0"
+  dependencies:
+    "@sentry/browser" "6.15.0"
+    "@sentry/core" "6.15.0"
+    "@sentry/minimal" "6.15.0"
+    "@sentry/types" "6.15.0"
+    "@sentry/utils" "6.15.0"
+    "tslib" "^1.9.3"
+
 "@soda/friendly-errors-webpack-plugin@^1.7.1":
   "integrity" "sha512-h2ooWqP8XuFqTXT+NyAFbrArzfQA7R6HTezADrvD9Re8fxMLTPPniLdqVTdDaO0eIoLaAwKT+d6w+5GeTk7Vbg=="
   "resolved" "https://registry.npmmirror.com/@soda/friendly-errors-webpack-plugin/download/@soda/friendly-errors-webpack-plugin-1.8.1.tgz?cache=0&sync_timestamp=1636965538214&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40soda%2Ffriendly-errors-webpack-plugin%2Fdownload%2F%40soda%2Ffriendly-errors-webpack-plugin-1.8.1.tgz"
@@ -9306,7 +9381,7 @@
     "minimist" "^1.2.0"
     "strip-bom" "^3.0.0"
 
-"tslib@^1.9.0":
+"tslib@^1.9.0", "tslib@^1.9.3":
   "integrity" "sha1-zy04vcNKE0vK8QkcQfZhni9nLQA="
   "resolved" "https://registry.nlark.com/tslib/download/tslib-1.14.1.tgz"
   "version" "1.14.1"
@@ -9662,7 +9737,7 @@
   "resolved" "https://registry.npmjs.org/vue-progressbar/-/vue-progressbar-0.7.5.tgz"
   "version" "0.7.5"
 
-"vue-router@^3.5.3":
+"vue-router@^3.5.3", "vue-router@3.x || 4.x":
   "integrity" "sha512-FUlILrW3DGitS2h+Xaw8aRNvGTwtuaxrRkNSHWTizOfLUie7wuYwezeZ50iflRn8YPV5kxmU2LQuu3nM/b3Zsg=="
   "resolved" "https://registry.npmjs.org/vue-router/-/vue-router-3.5.3.tgz"
   "version" "3.5.3"
@@ -9705,7 +9780,7 @@
   "resolved" "https://registry.npm.taobao.org/vue-template-es2015-compiler/download/vue-template-es2015-compiler-1.9.1.tgz"
   "version" "1.9.1"
 
-"vue@^2", "vue@^2 || ^3.0.0-0", "vue@^2.0.0", "vue@^2.6.11", "vue@^3.0.0 || ^2.0.0":
+"vue@^2", "vue@^2 || ^3.0.0-0", "vue@^2.0.0", "vue@^2.6.11", "vue@^3.0.0 || ^2.0.0", "vue@2.x || 3.x":
   "integrity" "sha1-5RqlJQJQ1Wmj+606ilpofWA24jU="
   "resolved" "https://registry.npmmirror.com/vue/download/vue-2.6.14.tgz"
   "version" "2.6.14"

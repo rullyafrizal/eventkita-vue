@@ -8,16 +8,17 @@
     <section class="container project-container mx-auto -mt-56 px-20">
       <div class="flex mt-3">
         <div class="w-3/4 mr-6">
-          <div class="bg-white p-3 mb-3 border border-gray-400 rounded-20">
+          <div class="bg-white p-3 mb-3 shadow-xl rounded-xl">
             <div class="item-image">
-              <img :src="activeImage.path" alt="" class="rounded-20 w-full" />
+              <img v-if="!Object.keys(activeImage).length" src="../assets/gray-image.png" alt="" class="animate-pulse rounded-xl w-full object-cover h-64" />
+              <img :src="activeImage.path" alt="" class="rounded-xl w-full" />
             </div>
           </div>
           <div class="flex -mx-2">
             <div
               v-for="image in event.pictures.data"
               :key="image.id"
-              class="relative w-1/5 bg-white m-2 p-2 border border-gray-400 rounded-20"
+              class="relative w-1/5 bg-white m-2 p-2 border border-gray-400 shadow-xl rounded-20"
               :class="{'outline-none ring-2 ring-blue-600': image.id === activeImage.id}"
               @click="activateImage(image)"
             >
@@ -48,7 +49,7 @@
         </div>
         <div class="w-1/4">
           <div
-            class="bg-white w-full p-5 border border-gray-400 rounded-20 sticky"
+            class="bg-white w-full p-5 shadow-2xl rounded-xl sticky"
             style="top: 15px;"
           >
             <h3>Event Organizer:</h3>
@@ -77,7 +78,10 @@
                 :class="{'opacity-50 hover:cursor-default': participations.joined, 'hover:bg-green-600': !participations.joined}"
                 class="mt-3 button-cta block w-full bg-yellow-500 text-white font-medium px-6 py-3 text-md rounded-full"
               >
-                {{ participations.joined ? 'You are participated' : 'Join Now' }}
+                <span class="flex-1 flex justify-center">
+                  <span v-if="loading" class="loader"></span>
+                  <span v-else>{{ participations.joined ? 'You are participated' : 'Join Now' }}</span>
+                </span>
               </button>
             </template>
             <template v-else>
@@ -94,8 +98,8 @@
     </section>
     <section class="container mx-auto pt-8 px-20">
       <div class="flex justify-between items-center">
-        <div class="w-full md:w-3/4 mr-6">
-          <h2 class="text-4xl text-gray-900 mb-2 font-medium">
+        <div class="w-full xl:w-3/4 p-10 overflow-x-auto bg-white hover:bg-gray-50 rounded-xl shadow-xl mb-20">
+          <h2 class="text-4xl text-gray-900 mb-3 font-semibold">
             {{ event.name }}
           </h2>
           <p class="font-light text-gray-600 text-lg mb-1">
@@ -109,7 +113,7 @@
 
           <div class="relative progress-bar">
             <div
-              class="overflow-hidden mb-4 text-xs flex rounded-full bg-gray-50 h-6"
+              class="overflow-hidden mb-4 text-xs flex rounded-full bg-gray-200 h-6"
             >
               <div
                 :style="
@@ -159,7 +163,8 @@ export default {
     return {
       event: {},
       activeImage: {},
-      participations: {}
+      participations: {},
+      loading: false
     }
   },
 
@@ -209,6 +214,7 @@ export default {
     },
 
     async join () {
+      this.loading = true
       const { id } = this.$route.params
       const config = {
         method: 'post',
@@ -220,6 +226,7 @@ export default {
 
       const response = await this.axios(config)
         .catch(() => {
+          this.loading = false
           toast().default('Ooops,', 'Something went wrong')
             .with({
               shape: 'pill',
@@ -247,6 +254,7 @@ export default {
           .show()
 
         setTimeout(() => {
+          this.loading = false
           this.$router.push('/dashboard')
         }, 2900)
       }
@@ -273,8 +281,11 @@ export default {
 
   async created () {
     await this.fetch()
-    await this.checkJoined()
-    console.log(this.participations)
+
+    if (!this.guest) {
+      await this.checkJoined()
+    }
+
     this.thumbnailImage()
   }
 }

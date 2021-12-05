@@ -22,7 +22,8 @@
             @click="save"
             class="bg-green-button hover:bg-orange-button text-white font-bold px-4 py-1 rounded-xl inline-flex items-center"
           >
-            Save
+            <span v-if="loading" class="loader"></span>
+            <span v-else>Save</span>
           </button>
         </div>
       </div>
@@ -30,8 +31,8 @@
         <div class="w-full lg:max-w-full lg:flex mb-4">
           <div class="w-full shadow-xl bg-white rounded-xl p-8 mt-2 flex flex-col justify-between leading-normal">
             <form class="w-full">
-              <div class="flex flex-wrap -mx-3 mb-6">
-                <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <div class="flex flex-wrap -mx-3 mb-5">
+                <div class="w-full md:w-1/2 p-5 md:mb-0">
                   <label
                     class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                   >
@@ -43,7 +44,7 @@
                     v-model="formEdit.name"
                   />
                 </div>
-                <div class="w-full md:w-1/2 px-3">
+                <div class="w-full md:w-1/2 p-5">
                   <label
                     class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                   >
@@ -59,7 +60,7 @@
                     {{ errors.data.errors.email ? errors.data.errors.email[0] : '' }}
                   </span>
                 </div>
-                <div class="w-full md:w-1/2 px-3 my-2">
+                <div class="w-full md:w-1/2 p-5">
                   <label
                     class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                   >
@@ -74,7 +75,7 @@
                     {{ errors.data.errors.phone ? errors.data.errors.phone[0] : '' }}
                   </span>
                 </div>
-                <div class="w-full md:w-1/2 px-3 my-2">
+                <div class="w-full md:w-1/2 p-5">
                   <label
                     class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                   >
@@ -90,7 +91,7 @@
                     {{ errors.data.errors.password ? errors.data.errors.password[0] : '' }}
                   </span>
                 </div>
-                <div v-if="formEdit.password" class="w-full md:w-1/2 px-3 my-2">
+                <div v-if="formEdit.password" class="w-full p-5 md:w-1/2 my-2">
                   <label
                     class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                   >
@@ -106,7 +107,7 @@
                     {{ errors.data.errors.password ? errors.data.errors.password[0] : '' }}
                   </span>
                 </div>
-                <div v-if="formEdit.password" class="w-full md:w-1/2 px-3 my-2">
+                <div v-if="formEdit.password" class="w-full md:w-1/2 p-5 my-2">
                   <label
                     class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                   >
@@ -150,7 +151,8 @@ export default {
       phone: '',
       password: ''
     },
-    errors: {}
+    errors: {},
+    loading: false
   }),
 
   computed: {
@@ -163,6 +165,7 @@ export default {
 
   methods: {
     async save () {
+      this.loading = true
       const data = this.formEdit
 
       const config = {
@@ -176,6 +179,7 @@ export default {
 
       const response = await this.axios(config)
         .catch((error) => {
+          this.loading = false
           this.errors = error.response
 
           if (this.errors.status === 422) {
@@ -217,6 +221,11 @@ export default {
             fontTone: 200
           })
           .show()
+
+        setTimeout(() => {
+          this.loading = false
+          this.$router.push('/dashboard/profile')
+        }, 500)
 
         this.clearPasswordField()
       }

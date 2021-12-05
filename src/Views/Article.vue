@@ -33,7 +33,7 @@
     </section>
     <section class="container mx-auto pt-8 px-20">
       <div class="flex justify-center items-center">
-        <div class="w-full md:w-3/4 mr-6">
+        <div class="w-full md:w-3/4 mb-20">
           <h2 class="text-4xl text-gray-900 mb-2 font-medium">
             {{ article.title }}
           </h2>

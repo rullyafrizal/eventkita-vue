@@ -6,9 +6,9 @@
         <Navbar />
         <div class="flex items-center pt-10 px-5 md:px-0">
           <div class="w-1/2">
-            <h1 class="leading-normal text-4xl text-white mb-5">
+            <h1 class="leading-normal font-semibold text-4xl text-white mb-5">
               We help <u class="hero-underline">people</u> to <br />
-              find their favorite events<br /> and <u class="hero-underline">get</u>
+              find their favorite <u class="hero-underline">events</u><br /> and get
               participated
             </h1>
             <p class="leading-loose text-white text-xl font-light mb-8">
@@ -23,15 +23,15 @@
             </router-link>
           </div>
           <div class="w-1/2 flex justify-center">
-            <img src="../assets/hero-image@2x.png" alt="crowdfunding project" />
+            <img src="../assets/hero-image-2.png" alt="crowdfunding project" />
           </div>
         </div>
       </div>
     </section>
-    <section class="container mx-auto pt-36 px-20" id="features">
+    <section class="container mx-auto pt-64 px-20" id="features">
       <div class="flex justify-between items-center mb-10">
         <div class="w-auto">
-          <h2 class="leading-normal text-3xl text-gray-900 mb-6">
+          <h2 class="leading-normal font-semibold text-3xl text-gray-900 mb-6">
             Only 3 steps to participate <br />
             in your favorite events
           </h2>
@@ -98,7 +98,7 @@
         <EventCard v-for="event in events" :key="event.id" :event="event" />
       </div>
     </section>
-    <section class="container mx-auto pt-24 px-20" id="testimonials">
+    <section class="container mx-auto pt-24 pb-36 px-20" id="testimonials">
       <div class="flex justify-between items-center">
         <div class="w-auto">
           <h2 class="leading-normal text-3xl text-gray-900 mb-8">

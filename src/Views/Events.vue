@@ -28,7 +28,7 @@
               :key="page.label"
               :disabled="!page.url"
               @click="movePage(page.url)"
-              class="flex items-center px-4 py-2 bg-gray-50 rounded-md"
+              class="flex items-center px-4 py-2 bg-gray-50 shadow-2xl rounded-md"
               :class="{'hover:bg-blue-600 hover:text-white': page.url, 'bg-blue-600 text-white': page.active}"
               v-html="page.label"
             ></button>
