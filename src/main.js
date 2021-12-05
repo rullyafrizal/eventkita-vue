@@ -18,7 +18,7 @@ Sentry.init({
   integrations: [
     new Integrations.BrowserTracing({
       routingInstrumentation: Sentry.vueRouterInstrumentation(router),
-      tracingOrigins: ['localhost', 'my-site-url.com', /^\//]
+      tracingOrigins: ['localhost', 'eventkita.my.id', /^\//]
     })
   ],
   // Set tracesSampleRate to 1.0 to capture 100%
