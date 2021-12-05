@@ -5,8 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "style": "tailwindcss build src/assets/styles/index.css -o src/assets/styles/tailwind.css"
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "@sentry/tracing": "^6.15.0",
