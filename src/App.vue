@@ -56,3 +56,4 @@ export default {
   opacity: 0;
 }
 </style>
+<style src="./index.css"></style>
