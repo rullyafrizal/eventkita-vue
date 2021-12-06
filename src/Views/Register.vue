@@ -140,6 +140,7 @@ export default {
 
       const response = await this.axios(config)
         .catch((err) => {
+          console.log(err.response)
           this.errors = err.response
           this.loading = false
 
