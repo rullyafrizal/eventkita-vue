@@ -109,61 +109,60 @@ export default {
           Accept: 'application/json'
         }
       }
+      this.axios.get(`${this.$apiDomain}/sanctum/csrf-cookie`).then(async (res) => {
+        const response = await this.axios(config)
+          .catch((err) => {
+            console.log(err.response)
+            this.errors = err.response
+            this.loading = false
 
-      const response = await this.axios(config)
-        .catch((err) => {
-          console.log(err.response)
-          this.errors = err.response
+            if (this.errors.status === 401) {
+              this.$toast.open({
+                message: 'We are sorry, your credentials does not<br/> match our records',
+                type: 'error',
+                duration: 5000,
+                dismissible: true,
+                position: 'top',
+                queue: true
+              })
+            } else if (this.errors.status === 422) {
+              this.$toast.open({
+                message: 'Oops, the given data was invalid',
+                type: 'error',
+                duration: 5000,
+                dismissible: true,
+                position: 'top',
+                queue: true
+              })
+            } else {
+              this.$toast.open({
+                message: 'Oops, Something went wrong',
+                type: 'error',
+                duration: 5000,
+                dismissible: true,
+                position: 'top',
+                queue: true
+              })
+            }
+          })
+
+        if (response.status === 200) {
+          this.$toast.open({
+            message: 'Yayy, &nbsp;Login success and now you are being redirected...',
+            type: 'success',
+            duration: 2000,
+            dismissible: true,
+            position: 'top',
+            queue: true
+          })
+
+          this.setToken(response.data.body)
           this.loading = false
-
-          if (this.errors.status === 401) {
-            this.$toast.open({
-              message: 'We are sorry, your credentials does not<br/> match our records',
-              type: 'error',
-              duration: 5000,
-              dismissible: true,
-              position: 'top',
-              queue: true
-            })
-          } else if (this.errors.status === 422) {
-            this.$toast.open({
-              message: 'Oops, the given data was invalid',
-              type: 'error',
-              duration: 5000,
-              dismissible: true,
-              position: 'top',
-              queue: true
-            })
-          } else {
-            this.$toast.open({
-              message: 'Oops, Something went wrong',
-              type: 'error',
-              duration: 5000,
-              dismissible: true,
-              position: 'top',
-              queue: true
-            })
-          }
-        })
-
-      if (response.status === 200) {
-        this.$toast.open({
-          message: 'Yayy, &nbsp;Login success and now you are being redirected...',
-          type: 'success',
-          duration: 2000,
-          dismissible: true,
-          position: 'top',
-          queue: true
-        })
-
-        this.setToken(response.data.body)
-        this.loading = false
-        setTimeout(() => {
-          this.$router.push('/events')
-        }, 2800)
-      }
-
-      this.loading = false
+          setTimeout(() => {
+            this.$router.push('/events')
+          }, 2800)
+        }
+      })
     }
   },
 

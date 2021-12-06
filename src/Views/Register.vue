@@ -135,7 +135,10 @@ export default {
       const config = {
         method: 'post',
         url: `${this.$apiDomain}/api/auth/register`,
-        data
+        data,
+        headers: {
+          Accept: 'application/json'
+        }
       }
 
       const response = await this.axios(config)
@@ -187,31 +190,33 @@ export default {
           }
         }
 
-        const response = await this.axios(config).catch(() => {
-          this.loading = false
+        this.axios.get(`${this.$apiDomain}/sanctum/csrf-cookie`).then(async (res) => {
+          const response = await this.axios(config).catch(() => {
+            this.loading = false
 
-          this.$toast.open({
-            message: 'Oops, Something went wrong please login manually',
-            type: 'error',
-            duration: 2300,
-            dismissible: true,
-            position: 'top',
-            queue: true
+            this.$toast.open({
+              message: 'Oops, Something went wrong please login manually',
+              type: 'error',
+              duration: 2300,
+              dismissible: true,
+              position: 'top',
+              queue: true
+            })
+
+            setTimeout(() => {
+              this.$router.push('/auth/login')
+            }, 2900)
           })
 
-          setTimeout(() => {
-            this.$router.push('/auth/login')
-          }, 2900)
+          if (response) {
+            this.setToken(response.data.body)
+
+            setTimeout(() => {
+              this.loading = false
+              this.$router.push('/events')
+            }, 2800)
+          }
         })
-
-        if (response) {
-          this.setToken(response.data.body)
-
-          setTimeout(() => {
-            this.loading = false
-            this.$router.push('/events')
-          }, 2800)
-        }
       }
     }
   },
