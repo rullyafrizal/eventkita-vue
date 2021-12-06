@@ -101,7 +101,6 @@
 </template>
 
 <script>
-import { toast } from 'tailwind-toast'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
@@ -145,44 +144,35 @@ export default {
           this.loading = false
 
           if (this.errors.status === 422) {
-            toast().default('Ooops,', `${this.errors.data.message}`)
-              .with({
-                shape: 'pill',
-                duration: 7000,
-                speed: 1000,
-                positionX: 'center',
-                positionY: 'top',
-                color: 'bg-red-500 text-gray-50',
-                fontTone: 200
-              })
-              .show()
+            this.$toast.open({
+              message: `Ooops, ${this.errors.data.message}`,
+              type: 'error',
+              duration: 5000,
+              dismissible: true,
+              position: 'top',
+              queue: true
+            })
           } else if (parseInt(this.errors.status) >= 500) {
-            toast().default('Ooops,', 'Something went wrong')
-              .with({
-                shape: 'pill',
-                duration: 7000,
-                speed: 1000,
-                positionX: 'center',
-                positionY: 'top',
-                color: 'bg-red-500 text-gray-50',
-                fontTone: 200
-              })
-              .show()
+            this.$toast.open({
+              message: 'Oops, Something went wrong',
+              type: 'error',
+              duration: 5000,
+              dismissible: true,
+              position: 'top',
+              queue: true
+            })
           }
         })
 
       if (response) {
-        toast().default('Yayyy,', 'You are registered and now redirecting...')
-          .with({
-            shape: 'pill',
-            duration: 2000,
-            speed: 1000,
-            positionX: 'center',
-            positionY: 'top',
-            color: 'bg-green-500 text-gray-50',
-            fontTone: 200
-          })
-          .show()
+        this.$toast.open({
+          message: 'Yayy, &nbsp;You are registered and now redirecting...',
+          type: 'success',
+          duration: 2000,
+          dismissible: true,
+          position: 'top',
+          queue: true
+        })
 
         const config = {
           method: 'post',
@@ -198,17 +188,15 @@ export default {
 
         const response = await this.axios(config).catch(() => {
           this.loading = false
-          toast().default('Oops,', 'Something went wrong, please login manually')
-            .with({
-              shape: 'pill',
-              duration: 2000,
-              speed: 2000,
-              positionX: 'center',
-              positionY: 'top',
-              color: 'bg-red-500 text-gray-50 text-center',
-              fontTone: 200
-            })
-            .show()
+
+          this.$toast.open({
+            message: 'Oops, Something went wrong please login manually',
+            type: 'error',
+            duration: 2300,
+            dismissible: true,
+            position: 'top',
+            queue: true
+          })
 
           setTimeout(() => {
             this.$router.push('/auth/login')

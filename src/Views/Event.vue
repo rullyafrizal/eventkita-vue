@@ -74,13 +74,16 @@
             <template v-if="!guest">
               <button
                 @click="join"
-                :disabled="participations.joined"
-                :class="{'opacity-50 hover:cursor-default': participations.joined, 'hover:bg-green-600': !participations.joined}"
+                :disabled="participations.joined || (event.participant_count == event.quota)"
+                :class="{'opacity-50 hover:cursor-default': participations.joined || (event.participant_count == event.quota), 'hover:bg-green-600': !participations.joined && !(event.participant_count == event.quota)}"
                 class="mt-3 button-cta block w-full bg-yellow-500 text-white font-medium px-6 py-3 text-md rounded-full"
               >
-                <span class="flex-1 flex justify-center">
+                <span v-if="event.participant_count !== event.quota" class="flex-1 flex justify-center">
                   <span v-if="loading" class="loader"></span>
                   <span v-else>{{ participations.joined ? 'You are participated' : 'Join Now' }}</span>
+                </span>
+                <span v-else class="flex-1 flex justify-center">
+                  <span>Full Quota</span>
                 </span>
               </button>
             </template>
@@ -145,7 +148,6 @@
 <script>
 import Navbar from '../components/Navbar'
 import { mapGetters } from 'vuex'
-import { toast } from 'tailwind-toast'
 
 export default {
   name: 'Event',
@@ -197,17 +199,14 @@ export default {
 
       const response = await this.axios(config)
         .catch(() => {
-          toast().default('Ooops,', 'Something went wrong')
-            .with({
-              shape: 'pill',
-              duration: 7000,
-              speed: 1000,
-              positionX: 'center',
-              positionY: 'top',
-              color: 'bg-red-500 text-gray-50',
-              fontTone: 200
-            })
-            .show()
+          this.$toast.open({
+            message: 'Oops, Something went wrong',
+            type: 'error',
+            duration: 5000,
+            dismissible: true,
+            position: 'top',
+            queue: true
+          })
         })
 
       this.participations = response.data.body
@@ -227,31 +226,25 @@ export default {
       const response = await this.axios(config)
         .catch(() => {
           this.loading = false
-          toast().default('Ooops,', 'Something went wrong')
-            .with({
-              shape: 'pill',
-              duration: 7000,
-              speed: 1000,
-              positionX: 'center',
-              positionY: 'top',
-              color: 'bg-red-500 text-gray-50',
-              fontTone: 200
-            })
-            .show()
+          this.$toast.open({
+            message: 'Oops, Something went wrong',
+            type: 'error',
+            duration: 5000,
+            dismissible: true,
+            position: 'top',
+            queue: true
+          })
         })
 
       if (response) {
-        toast().default('Yayy,', '&nbsp;Successfully joined, can\'t wait to see you present')
-          .with({
-            shape: 'pill',
-            duration: 2000,
-            speed: 1000,
-            positionX: 'center',
-            positionY: 'top',
-            color: 'bg-green-500 text-gray-50',
-            fontTone: 200
-          })
-          .show()
+        this.$toast.open({
+          message: 'Yayy, &nbsp;Successfully joined, can\'t wait to see you present',
+          type: 'success',
+          duration: 2000,
+          dismissible: true,
+          position: 'top',
+          queue: true
+        })
 
         setTimeout(() => {
           this.loading = false

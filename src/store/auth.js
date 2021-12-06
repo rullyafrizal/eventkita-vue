@@ -23,13 +23,14 @@ export default {
     setUser: async ({ commit }, payload) => {
       const config = {
         method: 'get',
-        url: 'http://eventkita.my.id/api/auth/me',
+        url: 'https://backend.eventkita.my.id/api/auth/me',
         headers: {
           Authorization: 'Bearer ' + payload.access_token
         }
       }
       try {
         const response = await axios(config)
+
         commit('setUser', response.data.body)
       } catch (error) {
         commit('setUser', {})

@@ -79,7 +79,6 @@
 <script>
 import Navbar from '../components/Navbar'
 import { mapGetters } from 'vuex'
-import { toast } from 'tailwind-toast'
 
 export default {
   name: 'Dashboard',
@@ -104,17 +103,14 @@ export default {
 
       const response = await this.axios(config).catch((error) => {
         if (parseInt(error.response.status) >= 500) {
-          toast().default('Ooops,', 'Something went wrong')
-            .with({
-              shape: 'pill',
-              duration: 7000,
-              speed: 1000,
-              positionX: 'center',
-              positionY: 'top',
-              color: 'bg-red-500 text-gray-50',
-              fontTone: 200
-            })
-            .show()
+          this.$toast.open({
+            message: 'Oops, Something went wrong',
+            type: 'error',
+            duration: 5000,
+            dismissible: true,
+            position: 'top',
+            queue: true
+          })
         }
       })
 

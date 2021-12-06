@@ -80,7 +80,14 @@ export default {
 
       const response = await this.axios(config)
         .catch((err) => {
-          alert('Failed fetching data')
+          this.$toast.open({
+            message: 'Oops, Something went wrong',
+            type: 'error',
+            duration: 5000,
+            dismissible: true,
+            position: 'top',
+            queue: true
+          })
           console.log(err)
         })
 

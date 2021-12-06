@@ -73,7 +73,6 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import { toast } from 'tailwind-toast'
 
 export default {
   name: 'Login',
@@ -117,56 +116,44 @@ export default {
           this.loading = false
 
           if (this.errors.status === 401) {
-            toast().default('We are sorry,', 'your credentials does not<br/> match our records')
-              .with({
-                shape: 'pill',
-                duration: 7000,
-                speed: 2000,
-                positionX: 'center',
-                positionY: 'top',
-                color: 'bg-red-500 text-gray-50 text-center',
-                fontTone: 200
-              })
-              .show()
+            this.$toast.open({
+              message: 'We are sorry, your credentials does not<br/> match our records',
+              type: 'error',
+              duration: 5000,
+              dismissible: true,
+              position: 'top',
+              queue: true
+            })
           } else if (this.errors.status === 422) {
-            toast().default('Ooops,', `${this.errors.data.errors.email[0]}`)
-              .with({
-                shape: 'pill',
-                duration: 7000,
-                speed: 1000,
-                positionX: 'center',
-                positionY: 'top',
-                color: 'bg-red-500 text-gray-50',
-                fontTone: 200
-              })
-              .show()
+            this.$toast.open({
+              message: 'Oops, the given data was invalid',
+              type: 'error',
+              duration: 5000,
+              dismissible: true,
+              position: 'top',
+              queue: true
+            })
           } else if (parseInt(this.errors.status) >= 500) {
-            toast().default('Ooops,', 'Something went wrong')
-              .with({
-                shape: 'pill',
-                duration: 7000,
-                speed: 1000,
-                positionX: 'center',
-                positionY: 'top',
-                color: 'bg-red-500 text-gray-50',
-                fontTone: 200
-              })
-              .show()
+            this.$toast.open({
+              message: 'Oops, Something went wrong',
+              type: 'error',
+              duration: 5000,
+              dismissible: true,
+              position: 'top',
+              queue: true
+            })
           }
         })
 
       if (response.status === 200) {
-        toast().default('Yayy,', '&nbsp;Login success and now you are being redirected...')
-          .with({
-            shape: 'pill',
-            duration: 2000,
-            speed: 1000,
-            positionX: 'center',
-            positionY: 'top',
-            color: 'bg-green-500 text-gray-50',
-            fontTone: 200
-          })
-          .show()
+        this.$toast.open({
+          message: 'Yayy, &nbsp;Login success and now you are being redirected...',
+          type: 'success',
+          duration: 2000,
+          dismissible: true,
+          position: 'top',
+          queue: true
+        })
 
         this.setToken(response.data.body)
         this.loading = false

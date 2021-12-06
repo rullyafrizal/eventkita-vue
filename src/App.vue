@@ -44,15 +44,6 @@ export default {
   }
 }
 </script>
-
-<style>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.45s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
+<style lang="scss">
+@import './assets/css/index.css';
 </style>

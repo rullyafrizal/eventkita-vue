@@ -135,7 +135,6 @@
 <script>
 import Navbar from '../components/Navbar'
 import { mapGetters } from 'vuex'
-import { toast } from 'tailwind-toast'
 
 export default {
   name: 'Profile',
@@ -183,44 +182,35 @@ export default {
           this.errors = error.response
 
           if (this.errors.status === 422) {
-            toast().default('Ooops,', `${this.errors.data.message}`)
-              .with({
-                shape: 'pill',
-                duration: 7000,
-                speed: 1000,
-                positionX: 'center',
-                positionY: 'top',
-                color: 'bg-red-500 text-gray-50',
-                fontTone: 200
-              })
-              .show()
+            this.$toast.open({
+              message: `Ooops, ${this.errors.data.message}`,
+              type: 'error',
+              duration: 5000,
+              dismissible: true,
+              position: 'top',
+              queue: true
+            })
           } else if (this.errors.status >= 500) {
-            toast().default('Ooops,', 'Something went wrong')
-              .with({
-                shape: 'pill',
-                duration: 7000,
-                speed: 1000,
-                positionX: 'center',
-                positionY: 'top',
-                color: 'bg-red-500 text-gray-50',
-                fontTone: 200
-              })
-              .show()
+            this.$toast.open({
+              message: 'Oops, Something went wrong',
+              type: 'error',
+              duration: 5000,
+              dismissible: true,
+              position: 'top',
+              queue: true
+            })
           }
         })
 
       if (response) {
-        toast().default('Yayyy,', 'Update profile success!')
-          .with({
-            shape: 'pill',
-            duration: 2000,
-            speed: 1000,
-            positionX: 'center',
-            positionY: 'top',
-            color: 'bg-green-500 text-gray-50',
-            fontTone: 200
-          })
-          .show()
+        this.$toast.open({
+          message: 'Yayy, &nbsp;Update profile success!',
+          type: 'success',
+          duration: 2000,
+          dismissible: true,
+          position: 'top',
+          queue: true
+        })
 
         setTimeout(() => {
           this.loading = false

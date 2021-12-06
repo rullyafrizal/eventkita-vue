@@ -81,7 +81,6 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import { toast } from 'tailwind-toast'
 
 export default {
   name: 'Navbar',
@@ -97,17 +96,14 @@ export default {
     }),
 
     logout () {
-      toast().default('Yayy,', '&nbsp;Logout success, see you...')
-        .with({
-          shape: 'pill',
-          duration: 2000,
-          speed: 1000,
-          positionX: 'center',
-          positionY: 'top',
-          color: 'bg-green-500 text-gray-50',
-          fontTone: 200
-        })
-        .show()
+      this.$toast.open({
+        message: 'Yayy, &nbsp;Logout success, see you...',
+        type: 'success',
+        duration: 2000,
+        dismissible: true,
+        position: 'top',
+        queue: true
+      })
 
       setTimeout(() => {
         this.setToken({})

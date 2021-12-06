@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
-import './assets/css/index.css'
+import './assets/css/tailwind.css'
 import store from './store'
 import axios from './plugins/axios'
 import router from './router'
@@ -8,6 +8,10 @@ import VueProgressBar from 'vue-progressbar'
 import VueMeta from 'vue-meta'
 import * as Sentry from '@sentry/vue'
 import { Integrations } from '@sentry/tracing'
+import './assets/tailwind.css'
+import VueToast from 'vue-toast-notification'
+// import 'vue-toast-notification/dist/theme-default.css'
+import 'vue-toast-notification/dist/theme-sugar.css'
 
 Vue.config.productionTip = false
 
@@ -41,8 +45,9 @@ const options = {
 }
 Vue.use(VueProgressBar, options)
 Vue.use(VueMeta)
+Vue.use(VueToast)
 
-Vue.prototype.$apiDomain = 'http://eventkita.my.id'
+Vue.prototype.$apiDomain = 'https://backend.eventkita.my.id'
 
 new Vue({
   axios,

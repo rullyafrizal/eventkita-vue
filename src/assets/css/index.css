@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 * {
     font-family: Poppins;
 }
@@ -208,4 +204,14 @@ img {
         box-shadow: 0 -2em;
         height: 5em;
     }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.45s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
 }
