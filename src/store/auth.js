@@ -28,7 +28,11 @@ export default {
           Authorization: 'Bearer ' + payload.access_token
         }
       }
-      axios.get('https://backend.eventkita.my.id/sanctum/csrf-cookie').then(async (res) => {
+      axios.get('https://backend.eventkita.my.id/sanctum/csrf-cookie', {
+        headers: {
+          'Access-Control-Allow-Credentials': true
+        }
+      }).then(async (res) => {
         try {
           const response = await axios(config)
 
