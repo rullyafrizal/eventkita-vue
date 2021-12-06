@@ -190,7 +190,7 @@ export default {
               position: 'top',
               queue: true
             })
-          } else if (this.errors.status >= 500) {
+          } else {
             this.$toast.open({
               message: 'Oops, Something went wrong',
               type: 'error',
