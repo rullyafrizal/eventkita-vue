@@ -214,8 +214,8 @@ export default {
 
         setTimeout(() => {
           this.loading = false
-          this.$router.push('/dashboard/profile')
-        }, 500)
+          this.$router.push('/dashboard')
+        }, 1000)
 
         this.clearPasswordField()
       }
