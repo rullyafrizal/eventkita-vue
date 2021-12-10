@@ -23,7 +23,7 @@ export default {
     setUser: async ({ commit }, payload) => {
       const config = {
         method: 'get',
-        url: 'https://backend.eventkita.my.id/auth/me',
+        url: 'https://backend.eventkita.my.id/api/auth/me',
         headers: {
           Authorization: 'Bearer ' + payload.access_token
         }
