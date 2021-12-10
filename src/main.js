@@ -22,7 +22,7 @@ Sentry.init({
   integrations: [
     new Integrations.BrowserTracing({
       routingInstrumentation: Sentry.vueRouterInstrumentation(router),
-      tracingOrigins: ['localhost', 'eventkita.my.id', /^\//]
+      tracingOrigins: ['eventkita.my.id', /^\//]
     })
   ],
   // Set tracesSampleRate to 1.0 to capture 100%
@@ -48,7 +48,7 @@ Vue.use(VueProgressBar, options)
 Vue.use(VueMeta)
 Vue.use(VueToast)
 
-Vue.prototype.$apiDomain = 'http://localhost:8000'
+Vue.prototype.$apiDomain = 'https://backend.eventkita.my.id'
 
 new Vue({
   axios,

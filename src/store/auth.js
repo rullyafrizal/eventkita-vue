@@ -23,12 +23,12 @@ export default {
     setUser: async ({ commit }, payload) => {
       const config = {
         method: 'get',
-        url: 'http://localhost:8000',
+        url: 'https://backend.eventkita.my.id/auth/me',
         headers: {
           Authorization: 'Bearer ' + payload.access_token
         }
       }
-      axios.get('http://localhost:8000/sanctum/csrf-cookie', {
+      axios.get('https://backend.eventkita.my.id/sanctum/csrf-cookie', {
         headers: {
           'Access-Control-Allow-Credentials': true
         }

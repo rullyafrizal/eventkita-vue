@@ -147,12 +147,11 @@ export default {
   watch: {
     formFilters: {
       handler: throttle(async function () {
-        this.$router.push('/events')
-        if (this.formFilters.eventTypes.length) {
-          await this.fetch(`${this.$apiDomain}/api/events-pagination?type=${this.formFilters.eventTypes.join(',')}`)
-        } else {
-          await this.fetch()
+        if (this.$route.fullPath !== '/events') {
+          this.$router.push('/events')
         }
+
+        this.formFilters.eventTypes.length ? await this.fetch(`${this.$apiDomain}/api/events-pagination?type=${this.formFilters.eventTypes.join(',')}`) : await this.fetch()
       }, 150),
       deep: true
     }
