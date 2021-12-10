@@ -10,11 +10,13 @@
   "dependencies": {
     "@sentry/tracing": "^6.15.0",
     "@sentry/vue": "^6.15.0",
+    "@tailwindcss/forms": "^0.3.4",
     "@tailwindcss/postcss7-compat": "^2.2.17",
     "@tailwindcss/typography": "^0.4.1",
     "autoprefixer": "^9.8.8",
     "axios": "^0.24.0",
     "core-js": "^3.6.5",
+    "lodash": "^4.17.21",
     "node-sass": "^5.0.0",
     "postcss": "^7.0.39",
     "sass-loader": "10.1.1",

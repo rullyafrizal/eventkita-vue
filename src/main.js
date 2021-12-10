@@ -48,7 +48,7 @@ Vue.use(VueProgressBar, options)
 Vue.use(VueMeta)
 Vue.use(VueToast)
 
-Vue.prototype.$apiDomain = 'https://backend.eventkita.my.id'
+Vue.prototype.$apiDomain = 'http://localhost:8000'
 
 new Vue({
   axios,
