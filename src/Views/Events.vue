@@ -24,16 +24,24 @@
               <div class="grid grid-cols-1 lg:grid-cols-4 gap-x-8 gap-y-10">
                 <!-- Filters -->
                 <form class="hidden lg:block">
+                  <div class="bg-white rounded-xl mt-8 px-6 border-b border-gray-200 py-6">
+                    <div class="border-2 py-1 px-3 flex justify-between rounded-lg">
+                      <input v-model="formFilters.search" class="outline-none text-gray-600 w-3/4" type="text" placeholder="Search Events" />
+                      <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400 hover:text-blue-400 transition duration-100 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                      </span>
+                    </div>
+                  </div>
 
-                  <div class="bg-white rounded-xl my-8 px-6 border-b border-gray-200 py-6">
+                  <div class="bg-white rounded-xl my-3 px-6 border-b border-gray-200 py-6">
                     <h3 class="-my-3 flow-root">
                       <!-- Expand/collapse section button -->
                       <button type="button" class="py-3 bg-white w-full flex items-center justify-between text-sm text-gray-400 hover:text-gray-500" aria-controls="filter-section-0" aria-expanded="false">
-                    <span class="font-medium text-gray-900">
-                      Event Type
-                    </span>
-                        <span class="ml-6 flex items-center">
-                    </span>
+                        <span class="font-medium text-gray-900">
+                          Event Type
+                        </span>
                       </button>
                     </h3>
                     <!-- Filter section, show/hide based on section state. -->
@@ -99,7 +107,8 @@ export default {
     events: [],
     eventTypes: [],
     formFilters: {
-      eventTypes: []
+      eventTypes: [],
+      search: ''
     }
   }),
 
@@ -150,8 +159,17 @@ export default {
         if (this.$route.fullPath !== '/events') {
           this.$router.push('/events')
         }
+        let url = `${this.$apiDomain}/api/events-pagination?`
 
-        this.formFilters.eventTypes.length ? await this.fetch(`${this.$apiDomain}/api/events-pagination?type=${this.formFilters.eventTypes.join(',')}`) : await this.fetch()
+        if (this.formFilters.eventTypes.length) {
+          url += `type=${this.formFilters.eventTypes.join(',')}`
+        }
+
+        if (this.formFilters.search) {
+          url += `&search=${this.formFilters.search.toLowerCase()}`
+        }
+
+        await this.fetch(url)
       }, 150),
       deep: true
     }
